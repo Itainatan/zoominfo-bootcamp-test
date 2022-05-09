@@ -19,8 +19,8 @@ app.get('/api/wands/:term?', async (req, res) => {
     try {
         const searchTerm = req.params.term === undefined ? "all" : req.params.term;
         const queryFilter = req.query;
-        console.log(searchTerm);
-        console.log(queryFilter);
+        //console.log(searchTerm);
+        //console.log(queryFilter);
         const searchResult = await search(searchTerm, queryFilter);
         res.status(200);
         res.send(JSON.stringify(searchResult));
@@ -49,7 +49,6 @@ app.get('/api/options/:type', async (req, res) => {
     }
 
 });
-
 
 app.listen(3000, '0.0.0.0', () => {
     console.log('Server is listening to http://0.0.0.0:3000/');

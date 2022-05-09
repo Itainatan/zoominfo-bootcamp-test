@@ -8,17 +8,20 @@ module.exports = async function getOptions(type) {
     let i = 0;
     data = await getData();
     const valuesOfType = getAllValuesOfType(data,type).sort();
-    const uniqTypes = valuesOfType.filter(() => {
-        console.log(uniqTypes.length);
-        i++;
-        return true;
-    })
+    const uniqTypes = removeDuplicates(valuesOfType);
     
-    return valuesOfType;
+    return uniqTypes;
 }
 
 const getAllValuesOfType = (data, type) => {
     return data.map((wand) => {
         return wand[type]
     });
+}
+
+const removeDuplicates = (data) => {
+    const seen = {};
+    return data.filter((value) => {
+        return seen.hasOwnProperty(value) ?  false : (seen[value] = true);
+    })
 }
