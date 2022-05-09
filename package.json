@@ -1,0 +1,18 @@
+{
+  "name": "bc3",
+  "version": "1.0.0",
+  "description": "Welcome to Zoominfo Engineering Bootcamp exam.",
+  "main": "done.js",
+  "scripts": {
+    "done": "git diff > diff && node done.js > diff.txt&& rimraf client/src && rimraf server/src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.zoominfo.com/bootcamp/on-site-exam.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
+}
