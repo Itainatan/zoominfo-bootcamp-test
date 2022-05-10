@@ -6,31 +6,38 @@ const getData = require('./database');
  */
 module.exports = async function search(term, filter) {
     const data = await getData();
-    let { wood: wood, core: core, length: length } = filter;
-    wood = wood === undefined ? "all" : wood;
-    core = core === undefined ? "all" : core;
-    length = length === undefined ? "all" : length;
     const dataFilteredByTerm = filterByTerm(data, term.toLowerCase());
-    const dataFilteredByFilter = filterByFilter(dataFilteredByTerm, wood, core, length);
+    const dataFilteredByFilter = filterByFilter(dataFilteredByTerm, filter);
+    
     return dataFilteredByFilter;
 }
 
 const filterByTerm = (data, term) => {
+    if (term === "all"){
+        return data;
+    }
+
     return data.filter((wand) => {
-        if(term === "all" || wand.owner.includes(term))
+        if(wand.owner.includes(term))
         {
             return true;
         }
     });
 }
 
-const filterByFilter = (data, wood, core, length) => {
+const filterByFilter = (data, filterObj) => {
+    let filterResult;
+    if (Object.keys(filterObj).length === 0) {
+        return data;
+    }
+
     return data.filter((wand) => {
-        if((wood === "all" || wand.wood === wood) &&
-        (core === "all" || wand.core === core) &&
-        (length === "all" || wand.length === length))
-        {
-            return true;
-        }
+        filterResult = true;
+        Object.entries(filterObj).forEach(([key, value]) => {
+            if (wand[key] !== value){
+                filterResult = false;
+            }
+        })
+        return filterResult;
     });
 }

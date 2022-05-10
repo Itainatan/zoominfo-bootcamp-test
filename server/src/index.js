@@ -19,8 +19,6 @@ app.get('/api/wands/:term?', async (req, res) => {
     try {
         const searchTerm = req.params.term === undefined ? "all" : req.params.term;
         const queryFilter = req.query;
-        //console.log(searchTerm);
-        //console.log(queryFilter);
         const searchResult = await search(searchTerm, queryFilter);
         res.status(200);
         res.send(JSON.stringify(searchResult));
@@ -37,6 +35,7 @@ app.get('/api/wands/:term?', async (req, res) => {
  */
 //const optionsType = 
 //optionsResult = 
+
 app.get('/api/options/:type', async (req, res) => {
     try {
         const optionsType = req.params.type;

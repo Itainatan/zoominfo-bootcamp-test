@@ -21,6 +21,7 @@ const getAllValuesOfType = (data, type) => {
 
 const removeDuplicates = (data) => {
     const seen = {};
+    
     return data.filter((value) => {
         return seen.hasOwnProperty(value) ?  false : (seen[value] = true);
     })
