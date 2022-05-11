@@ -3,12 +3,19 @@
 </section>
 <section>
   <p>Welcome to Ollivander Archive. You can search our wands list.</p>
-  <app-filter (changed)="filterSearch($event)" [options]="options | async"></app-filter>
+  <app-filter
+    (changed)="filterSearch($event)"
+    [options]="options | async"
+  ></app-filter>
 </section>
 <section>
-  <app-results [results]="wands | async"
-               (selected)="selected=$event"></app-results>
-  <app-details *ngIf="selected"
-               [wand]="selected"
-               (unselect)="true"></app-details>
+  <app-results
+    [results]="wands | async"
+    (selected)="selected = $event"
+  ></app-results>
+  <app-details
+    *ngIf="selected"
+    [wand]="selected"
+    (unselect)="(true)"
+  ></app-details>
 </section>
