@@ -8,6 +8,11 @@ const verify = (req, res, next) => {
     next(req.headers.bootcamp === 'BC3' ? undefined : new Error('client not verified'));
 };
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 /**
  * Task Server/4:
  * Fix me
@@ -22,7 +27,6 @@ app.get('/api/wands/:term?', async (req, res) => {
         const searchResult = await search(searchTerm, queryFilter);
         res.status(200);
         res.send(JSON.stringify(searchResult));
-
     } catch (error) {
         res.status(502);
         res.send(error);

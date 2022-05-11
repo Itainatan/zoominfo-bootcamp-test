@@ -8,7 +8,7 @@ module.exports = async function search(term, filter) {
     const data = await getData();
     const dataFilteredByTerm = filterByTerm(data, term.toLowerCase());
     const dataFilteredByFilter = filterByFilter(dataFilteredByTerm, filter);
-    
+
     return dataFilteredByFilter;
 }
 
@@ -18,7 +18,7 @@ const filterByTerm = (data, term) => {
     }
 
     return data.filter((wand) => {
-        if(wand.owner.includes(term))
+        if(wand.owner.toLowerCase().includes(term))
         {
             return true;
         }
@@ -34,7 +34,7 @@ const filterByFilter = (data, filterObj) => {
     return data.filter((wand) => {
         filterResult = true;
         Object.entries(filterObj).forEach(([key, value]) => {
-            if (wand[key] !== value){
+            if (value !== "All" && wand[key] !== value){
                 filterResult = false;
             }
         })

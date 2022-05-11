@@ -21,4 +21,8 @@ export class ResultsComponent {
   select(wand: Wand) {
     this.selected.emit(wand);
   }
+
+  getColor(event: number){
+    return COLORS[event%5];
+  }
 }

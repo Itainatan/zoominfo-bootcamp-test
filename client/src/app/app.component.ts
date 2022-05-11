@@ -26,9 +26,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.options = forkJoin({
-      core: this.http.get('/api/options/core'),
-      length: this.http.get('/api/options/length'),
-      wood: this.http.get('/api/options/wood')
+      core: this.http.get('http://127.0.0.1:3000/api/options/core'),
+      length: this.http.get('http://127.0.0.1:3000/api/options/length'),
+      wood: this.http.get('http://127.0.0.1:3000/api/options/wood')
     }) as Observable<FilterOptions>;
     this.fetchWands();
   }
@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
      * Fix me
      */
     const {wood, term, core, length} = this.searchQuery;
-    this.wands = this.http.get<Wand[]>('/api/wands');
+    console.log(`the search query is: ${JSON.stringify(this.searchQuery)}`);
+    this.wands = this.http.get<Wand[]>(`http://127.0.0.1:3000/api/wands/${term}?wood=${wood}&core=${core}&length=${length}`);
   }
 
   filterSearch(e: { [key: string]: string } | any) {
